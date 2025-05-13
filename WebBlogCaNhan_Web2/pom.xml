@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>huynbq.ntu</groupId>
-	<artifactId>TracNghiemTinHoc_Web2</artifactId>
+	<artifactId>WebBlogCaNhan_Web2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TracNghiemTinHoc_Web2</name>
-	<description>Web trăc nghiệm tin học</description>
+	<name>WebBlogCaNhan_Web2</name>
+	<description>Web Blog ca nhan</description>
 	<url/>
 	<licenses>
 		<license/>
