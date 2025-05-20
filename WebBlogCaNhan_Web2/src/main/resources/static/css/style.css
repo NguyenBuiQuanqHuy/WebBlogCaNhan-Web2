@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* style.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.font-island {
+  font-family: 'Island Moments', cursive;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: #c0ffb7;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 60px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: #f8f9fa;
+  padding: 15px;
+  z-index: 999;
+  transition: left 0.3s ease;
+}
+
+.sidebar.hidden {
+  left: -280px;
+}
+
+.main-content {
+  margin-top: 80px;
+  margin-left: 250px;
+  padding: 40px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.full-width {
+  margin-left: 0;
+}
+
+.sidebar .btn {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px;
+  border-radius: 5px;
+  color: #333;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #e2e6ea;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -220px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .main-content.active {
+    margin-left: 220px;
+  }
+}
