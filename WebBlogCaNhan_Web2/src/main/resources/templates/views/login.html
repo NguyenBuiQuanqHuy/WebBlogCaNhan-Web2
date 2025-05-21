@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Login Form</title>
+<title>Login</title>
 <!-- Link đến file CSS -->
 <link rel="stylesheet" href="css/login.css" />
 <!-- Google font -->
@@ -15,7 +15,11 @@
       <img src="image/Blog-Logo.png" alt="Logo Blog" />
     </div>
     <div class="subtitle" aria-label="Mô tả">Chia sẻ khoảnh khắc cuộc sống</div>
-    <form>
+     <!-- Hiển thị lỗi nếu có -->
+    <div th:if="${error}" style="color: red; text-align: center;">
+      <p th:text="${error}"></p>
+    </div>
+      <form method="post" th:action="@{/login}">
       <div class="input-group">
         <input type="text" name="username" placeholder="Tên đăng nhập" aria-label="Tên đăng nhập" />
       </div>
@@ -23,12 +27,12 @@
         <input type="password" name="password" placeholder="Mật khẩu" aria-label="Mật khẩu" />
       </div>
       <div class="forgot-password">
-        <a href="#" aria-label="Quên mật khẩu">Quên mật khẩu ?</a>
+        <a href="" aria-label="Quên mật khẩu">Quên mật khẩu ?</a>
       </div>
       <button type="submit" class="btn-login" aria-label="Đăng nhập">Đăng nhập</button>
     </form>
     <div class="register">
-      <a href="#" aria-label="Đăng ký">Đăng ký</a>
+      <a href="/register" aria-label="Đăng ký">Đăng ký</a>
     </div>
   </div>
 </body>
