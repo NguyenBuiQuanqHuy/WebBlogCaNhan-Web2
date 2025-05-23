@@ -22,7 +22,7 @@ public class PostController {
 	@GetMapping("/posts/create")
 	public String showCreatePostForm(ModelMap model) {
 	    model.addAttribute("categories", categoryRepository.findAll());
-	    return "create-post";
+	    return "views/createblog";
 	}
 
 	@PostMapping("/posts/create")
@@ -33,7 +33,7 @@ public class PostController {
 	                         HttpSession session) {
 	    String username = (String) session.getAttribute("username");
 	    postService.createPost(title, content, username, categoryId, Mode.valueOf(mode));
-	    return "redirect:/posts"; // hoặc redirect đến trang chi tiết
+	    return "redirect:/home"; // hoặc redirect đến trang chi tiết
 	}
 
 }

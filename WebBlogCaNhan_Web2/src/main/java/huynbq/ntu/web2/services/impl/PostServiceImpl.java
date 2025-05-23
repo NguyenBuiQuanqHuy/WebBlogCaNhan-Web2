@@ -1,4 +1,4 @@
-package huynbq.ntu.web2.services.implement;
+package huynbq.ntu.web2.services.impl;
 
 import java.time.LocalDateTime;
 
