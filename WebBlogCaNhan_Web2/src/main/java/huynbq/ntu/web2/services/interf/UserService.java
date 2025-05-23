@@ -1,4 +1,4 @@
-package huynbq.ntu.web2.services;
+package huynbq.ntu.web2.services.interf;
 
 import org.springframework.stereotype.Service;
 

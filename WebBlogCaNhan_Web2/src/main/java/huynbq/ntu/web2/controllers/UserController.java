@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import huynbq.ntu.web2.entities.User;
-import huynbq.ntu.web2.services.UserService;
+import huynbq.ntu.web2.services.interf.UserService;
 
 @Controller
 public class UserController {

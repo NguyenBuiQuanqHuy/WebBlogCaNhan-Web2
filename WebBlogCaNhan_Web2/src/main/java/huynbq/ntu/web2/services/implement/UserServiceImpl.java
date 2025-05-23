@@ -1,4 +1,4 @@
-package huynbq.ntu.web2.services;
+package huynbq.ntu.web2.services.implement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import huynbq.ntu.web2.entities.User;
 import huynbq.ntu.web2.repositories.UserRepository;
+import huynbq.ntu.web2.services.interf.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 	 @Autowired
