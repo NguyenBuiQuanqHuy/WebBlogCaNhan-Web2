@@ -8,5 +8,5 @@ import huynbq.ntu.web2.entities.User;
 public interface UserService {
 	boolean register(User user);
 	User findByUsername(String username);
-	public boolean checkPassword(String rawPassword, String encodedPassword);
+	public boolean checkLogin(String username, String rawPassword);
 }

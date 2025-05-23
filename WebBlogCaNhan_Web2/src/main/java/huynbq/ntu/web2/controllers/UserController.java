@@ -61,4 +61,20 @@ public class UserController {
     public String loginPage() {
         return "views/login"; // Tạo file login.html riêng
     }
+    
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        ModelMap model) {
+
+        boolean success = userService.checkLogin(username, password);
+
+        if (!success) {
+            model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
+            return "views/login";
+        }
+
+        return "redirect:/home";
+    }
+
 }

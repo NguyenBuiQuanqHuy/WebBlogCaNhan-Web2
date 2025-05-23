@@ -30,9 +30,14 @@ public class UserServiceImpl implements UserService{
 		 return userRepository.findByUsername(username);
 	}
 	@Override
-	public boolean checkPassword(String rawPassword, String encodedPassword) {
+	public boolean checkLogin(String username, String rawPassword) {
 		// TODO Auto-generated method stub
-		return passwordEncoder.matches(rawPassword, encodedPassword);
+		User user = findByUsername(username);
+        if (user == null) return false;
+
+        return passwordEncoder.matches(rawPassword, user.getPassword());
 	}
+	
+	
 
 }
