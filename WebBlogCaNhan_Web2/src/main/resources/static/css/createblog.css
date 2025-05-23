@@ -1,0 +1,48 @@
+.post-form {
+  background-color: #eee;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-title {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+.form-selects {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form-select {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+.form-content {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+.btn-submit {
+  align-self: center;
+  padding: 8px 20px;
+  background-color: #2aa77b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
