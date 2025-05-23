@@ -25,27 +25,27 @@
 <div class="main-content" id="mainContent">
   <!-- Nội dung chính được gom trong 1 div nhỏ hơn -->
   <div class="content-wrapper">
-    <div class="post-form">
-  <input type="text" class="form-title" placeholder="Title">
+   <form th:action="@{/posts/create}" method="post" class="post-form">
+  <input type="text" class="form-title" name="title" th:field="*{title}" placeholder="Title">
 
   <div class="form-selects">
-    <select class="form-select">
+    <select class="form-select" name="categoryId" th:field="*{categoryId}">
       <option disabled selected>Chủ đề</option>
-      <option value="1">Chủ đề 1</option>
-      <option value="2">Chủ đề 2</option>
+      <option th:each="c : ${categories}" th:value="${c.ID}" th:text="${c.name}"></option>
     </select>
 
-    <select class="form-select">
+    <select class="form-select" name="mode" th:field="*{mode}">
       <option disabled selected>Trạng thái</option>
-      <option value="public">Công khai</option>
-      <option value="private">Riêng tư</option>
+      <option value="PUBLIC">Công khai</option>
+      <option value="PRIVATE">Riêng tư</option>
     </select>
   </div>
 
-  <textarea class="form-content" rows="6" placeholder="Nhập nội dung..."></textarea>
+  <textarea class="form-content" rows="6" name="content" th:field="*{content}" placeholder="Nhập nội dung..."></textarea>
 
-  <button class="btn-submit">ĐĂNG BÀI</button>
-</div>
+  <button class="btn-submit" type="submit">ĐĂNG BÀI</button>
+</form>
+
     
   </div>
 </div>
