@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Login</title>
 <!-- Link đến file CSS -->
-<link rel="stylesheet" href="css/login.css" />
+<link rel="stylesheet" th:href="@{/css/login.css}">
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="login-container" role="main">
     <div class="logo" aria-label="Logo Blog">
-      <img src="image/Blog-Logo.png" alt="Logo Blog" />
+      <img th:src="@{/image/Blog-Logo.png}" alt="Logo Blog" />
     </div>
     <div class="subtitle" aria-label="Mô tả">Chia sẻ khoảnh khắc cuộc sống</div>
      <!-- Hiển thị lỗi nếu có -->
     <div th:if="${error}" style="color: red; text-align: center;">
       <p th:text="${error}"></p>
     </div>
-      <form method="post" th:action="@{/login}">
+      <form method="post" th:action="@{/blog/login}">
       <div class="input-group">
         <input type="text" name="username" placeholder="Tên đăng nhập" aria-label="Tên đăng nhập" />
       </div>
@@ -32,7 +32,7 @@
       <button type="submit" class="btn-login" aria-label="Đăng nhập">Đăng nhập</button>
     </form>
     <div class="register">
-      <a href="/register" aria-label="Đăng ký">Đăng ký</a>
+      <a href="/blog/register" aria-label="Đăng ký">Đăng ký</a>
     </div>
   </div>
 </body>

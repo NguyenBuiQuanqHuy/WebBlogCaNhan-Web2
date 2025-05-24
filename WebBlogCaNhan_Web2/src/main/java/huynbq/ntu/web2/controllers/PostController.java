@@ -19,13 +19,13 @@ public class PostController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
-	@GetMapping("/posts/create")
+	@GetMapping("/blog/create")
 	public String showCreatePostForm(ModelMap model) {
 	    model.addAttribute("categories", categoryRepository.findAll());
 	    return "views/createblog";
 	}
 
-	@PostMapping("/posts/create")
+	@PostMapping("/blog/create")
 	public String createPost(@RequestParam String title,
 	                         @RequestParam String content,
 	                         @RequestParam String mode,
@@ -33,7 +33,7 @@ public class PostController {
 	                         HttpSession session) {
 	    String username = (String) session.getAttribute("username");
 	    postService.createPost(title, content, username, categoryId, Mode.valueOf(mode));
-	    return "redirect:/home"; // hoặc redirect đến trang chi tiết
+	    return "redirect:/blog/home"; // hoặc redirect đến trang chi tiết
 	}
 
 }

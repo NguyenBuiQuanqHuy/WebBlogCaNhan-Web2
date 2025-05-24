@@ -27,7 +27,7 @@ public class PostServiceImpl implements PostService{
 	public Post createPost(String title, String content, String username, int categoryId, Mode mode) {
 		// TODO Auto-generated method stub
 		 User user = userRepository.findByUsername(username);
-	        Category category = categoryRepository.findById(categoryId).orElse(null);
+	     Category category = categoryRepository.findById(categoryId).orElse(null);
 
 	        if (user == null || category == null) {
 	            return null; // hoặc throw exception

@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import huynbq.ntu.web2.entities.User;
 import huynbq.ntu.web2.services.interf.UserService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
 	@Autowired
 	UserService userService;
-	@GetMapping("/register")
+	@GetMapping("/blog/register")
     public String showRegisterForm() {
         return "views/register"; // trỏ đến file HTML: register.html
     }
 	
-	@PostMapping("/register")
+	@PostMapping("/blog/register")
 	public String register(@RequestParam String username,
 	                       @RequestParam String password,
 	                       @RequestParam String confirmPassword,
@@ -47,7 +48,7 @@ public class UserController {
 	        return "views/register";
 	    }
 
-	    return "redirect:/login";
+	    return "redirect:/blog/login";
 	}
 
 	// Hàm kiểm tra mật khẩu hợp lệ
@@ -57,15 +58,15 @@ public class UserController {
 	}
 
 
-    @GetMapping("/login")
+    @GetMapping("/blog/login")
     public String loginPage() {
         return "views/login"; // Tạo file login.html riêng
     }
     
-    @PostMapping("/login")
+    @PostMapping("/blog/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
-                        ModelMap model) {
+                        ModelMap model,HttpSession session) {
 
         boolean success = userService.checkLogin(username, password);
 
@@ -73,8 +74,15 @@ public class UserController {
             model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
             return "views/login";
         }
+        session.setAttribute("username", username);
 
-        return "redirect:/home";
+        return "redirect:/blog/home";
     }
+    
+    @GetMapping("/blog/logout")
+    public String logout() { // xóa toàn bộ session
+        return "redirect:/blog/login"; // chuyển về trang login
+    }
+
 
 }

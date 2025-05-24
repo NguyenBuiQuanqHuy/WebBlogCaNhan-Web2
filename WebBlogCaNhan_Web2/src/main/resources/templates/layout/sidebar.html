@@ -1,15 +1,17 @@
 <!-- fragments/sidebar.html -->
 <div class="sidebar" id="sidebar" th:fragment="sidebar">
   <div class="text-center mb-3">
-    <strong>username</strong>
+    <strong th:text="${username}">username</strong>
   </div>
-  <button class="btn btn-outline-success btn-sm mb-4">
-    <i class="fas fa-plus"></i> Thêm Bài Đăng
-  </button>
+  <button class="btn btn-outline-success btn-sm mb-4" onclick="window.location.href='/blog/create'">
+  <i class="fas fa-plus"></i> Thêm Bài Đăng
+</button>
 
   <nav class="nav flex-column">
     <a class="nav-link" href="#"><i class="fas fa-home"></i> Trang chủ</a>
     <a class="nav-link" href="#"><i class="fa-solid fa-blog"></i> Blog của tôi</a>
-    <a class="nav-link fw-bold text-dark" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+   <a class="nav-link fw-bold text-dark" href="/blog/logout">
+	  <i class="fas fa-sign-out-alt"></i> Đăng xuất
+	</a>
   </nav>
 </div>
