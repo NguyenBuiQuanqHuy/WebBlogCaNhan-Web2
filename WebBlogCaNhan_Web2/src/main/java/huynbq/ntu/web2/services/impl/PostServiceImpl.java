@@ -59,5 +59,11 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		 return postRepository.findAll();
 	}
+	@Override
+	public List<Post> getPostsByUser(String username) {
+		// TODO Auto-generated method stub
+		return postRepository.findPostsByUsername(username);
+	}
+	
 	
 }

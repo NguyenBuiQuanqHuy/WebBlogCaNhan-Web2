@@ -1,8 +1,11 @@
 package huynbq.ntu.web2.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import huynbq.ntu.web2.entities.Category;
 import huynbq.ntu.web2.entities.Post;
+import huynbq.ntu.web2.entities.User;
 import huynbq.ntu.web2.repositories.CategoryRepository;
 import huynbq.ntu.web2.services.interf.PostService;
+import huynbq.ntu.web2.services.interf.UserService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
 	@Autowired
 	PostService postService;
+	@Autowired
+	UserService userService;
 	@Autowired
 	CategoryRepository categoryRepository;
 	@GetMapping("/blog/home")
@@ -48,10 +56,15 @@ public class HomeController {
 	}
 	
 	
-	@GetMapping("/blog/myblog")
-	public String getMethodName() {
-		return "views/myblog";
+	@GetMapping("blog/myblog")
+	public String viewMyBlog(ModelMap model, HttpSession session) {
+		String username = (String) session.getAttribute("username");
+	    List<Post> myPosts = postService.getPostsByUser(username);
+	    model.addAttribute("posts", myPosts);
+	    return "views/myblog";
 	}
+
+
 	
 
 }

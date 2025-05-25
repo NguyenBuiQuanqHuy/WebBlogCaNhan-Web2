@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import huynbq.ntu.web2.entities.Post;
+import huynbq.ntu.web2.entities.User;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer>{
 	 @Query("SELECT p FROM Post p WHERE p.mode = 'cong_khai' ORDER BY FUNCTION('RAND')")
@@ -18,6 +19,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 		       "OR LOWER(p.user.username) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
 		       "AND (:categoryId IS NULL OR p.category.ID = :categoryId)")
 		List<Post> searchByKeywordAndCategory(@Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
-
+	 @Query("SELECT p FROM Post p WHERE p.user.username = :username ORDER BY p.created_at DESC")
+	    List<Post> findPostsByUsername(@Param("username") String username);
 
 }

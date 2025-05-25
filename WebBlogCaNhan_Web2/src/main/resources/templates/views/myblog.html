@@ -8,53 +8,55 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
   <link th:href="@{/css/style.css}" rel="stylesheet" />
-	<link th:href="@{/css/home.css}" rel="stylesheet" />
-
+  <link th:href="@{/css/home.css}" rel="stylesheet" />
 </head>
 <body>
 
   <!-- Header -->
-   <div th:replace="~{layout/header :: header}"></div>
+  <div th:replace="~{layout/header :: header}"></div>
 
   <!-- Sidebar -->
-   <div th:replace="~{layout/sidebar :: sidebar}"></div>
+  <div th:replace="~{layout/sidebar :: sidebar}"></div>
 
   <!-- Main Content -->
-  <!-- Main Content -->
-<div class="main-content" id="mainContent">
-  <!-- Nội dung chính được gom trong 1 div nhỏ hơn -->
-  <div class="content-wrapper">
- 
-	<h1 class="page-title">Blog của tôi</h1>
-    <div th:each="post : ${posts}" class="post-card">
-      <div class="post-header">
-        <span class="username" th:text="${post.user.username}">username</span>
-        <span class="post-date" th:text="${#temporals.format(post.created_at, 'dd/MM/yyyy HH:mm')}">14/05/2025 21:00</span>
-        <span class="topic" th:text="${post.category.category_name}">Chủ đề</span>
-      </div>
+  <div class="main-content" id="mainContent">
+    <div class="content-wrapper">
+      <h1 class="page-title">Blog của tôi</h1>
 
-      <div class="post-title" th:text="${post.title}">Title</div>
-       <div class="post-actions">
-          <button class="btn-action btn-edit" title="Sửa">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </button>
-          <button class="btn-action btn-delete" title="Xóa">
-            <i class="fa-solid fa-trash"></i>
-          </button>
+      <div class="posts-list">
+        <div th:if="${posts.isEmpty()}">
+          <p>Bạn chưa có bài viết nào.</p>
+        </div>
+
+        <div th:each="post : ${posts}" class="post-card mb-4">
+          <div class="post-header d-flex justify-content-between">
+            <div>
+              <span class="username fw-bold" th:text="${post.user.username}">username</span> · 
+              <span class="post-date" th:text="${#temporals.format(post.created_at, 'dd/MM/yyyy HH:mm')}">14/05/2025 21:00</span> · 
+              <span class="topic text-muted" th:text="${post.category.category_name}">Chủ đề</span>
+            </div>
+            <div class="post-actions">
+              <button class="btn btn-sm btn-outline-primary me-2" title="Sửa">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" title="Xóa">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="post-title h5 mt-2 mb-2" th:text="${post.title}">Tiêu đề</div>
+          <div class="post-content mb-3" th:utext="${post.content}">Nội dung</div>
+
+          <div class="post-footer">
+            <button class="btn btn-sm btn-secondary"><i class="fa-solid fa-comment"></i> Bình luận</button>
+          </div>
         </div>
       </div>
-    <div class="post-content" th:utext="${post.content}"></div>
 
-
-      <div class="post-footer">
-        <button class="btn-comment"><i class="fa-solid fa-comment"></i> Bình luận</button>
-      </div>
     </div>
   </div>
-</div>
-
 
   <script src="/js/menu.js"></script>
-
 </body>
 </html>
