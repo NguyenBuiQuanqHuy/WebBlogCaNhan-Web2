@@ -49,5 +49,15 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		 return postRepository.findRandomCongKhaiPosts();
 	}
-
+	@Override
+	public List<Post> searchPosts(String keyword, Integer categoryId) {
+		// TODO Auto-generated method stub
+		  return postRepository.searchByKeywordAndCategory(keyword, categoryId);
+	}
+	@Override
+	public List<Post> getAllPosts() {
+		// TODO Auto-generated method stub
+		 return postRepository.findAll();
+	}
+	
 }

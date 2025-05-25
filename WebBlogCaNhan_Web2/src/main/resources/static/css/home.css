@@ -47,7 +47,6 @@
   color: #999;
   background-color: transparent;
   border: none;
-  pointer-events: none;
 }
 
 .btn-topic {
@@ -142,3 +141,53 @@
 .btn-comment:hover {
   color: #004c99;
 }
+
+
+/* Tiêu đề lớn trên đầu trang */
+.page-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Wrapper cho tiêu đề bài viết + nút sửa/xóa */
+.post-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Các nút hành động (sửa, xóa) */
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Style chung cho nút sửa/xóa */
+.btn-action {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 18px;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.btn-action:hover {
+  color: #000;
+}
+
+/* Riêng nút xóa có màu đỏ khi hover */
+.btn-delete:hover {
+  color: #d9534f; /* đỏ */
+}
+
+/* Riêng nút sửa có màu xanh khi hover */
+.btn-edit:hover {
+  color: #0275d8; /* xanh dương */
+}
+

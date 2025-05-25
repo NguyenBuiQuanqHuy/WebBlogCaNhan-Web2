@@ -10,4 +10,6 @@ import huynbq.ntu.web2.entities.Post;
 public interface PostService {
 	public Post createPost(String title, String content, String username, int categoryId, Mode mode);
 	public List<Post> getRandomPublicPosts();
+	public List<Post> searchPosts(String keyword, Integer categoryId);
+	public List<Post> getAllPosts();
 }
