@@ -30,7 +30,7 @@
   <!-- Nội dung chính được gom trong 1 div nhỏ hơn -->
   <div class="content-wrapper">
   <form th:action="@{/blog/create}" method="post" class="post-form">
-  <input type="text" class="form-title" name="title" placeholder="Title" required>
+  <input type="text" class="form-title" name="title" placeholder="Title" required/>
 <div class="form-selects">
   <select class="form-select" name="categoryId" required>
     <option value="">Chủ đề</option>
@@ -44,7 +44,7 @@
   </select>
    <button class="btn-submit" type="submit">ĐĂNG BÀI</button>
  </div>
-  <textarea class="form-content" rows="6" name="content" placeholder="Nhập nội dung..."required></textarea>
+  <textarea class="form-content" rows="6" name="content" placeholder="Nhập nội dung..."></textarea>
 
  
 </form>

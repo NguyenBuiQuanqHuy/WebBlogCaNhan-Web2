@@ -1,6 +1,7 @@
 tinymce.init({
         selector: 'textarea.form-content',
-        language: 'vi',
+    /*    language: 'vi',*/
+		license_key: 'gpl',
         height: 800,
         plugins: 'advlist autolink lists link image charmap preview anchor pagebreak code fullscreen table emoticons autosave',
         toolbar: 'undo redo | styles | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | emoticons | fullscreen preview code',
