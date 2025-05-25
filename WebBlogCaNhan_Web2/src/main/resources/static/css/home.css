@@ -103,7 +103,27 @@
   font-size: 15px;
   color: #444;
   line-height: 1.6;
+
+  /* Bổ sung để ngăn tràn khung */
+  overflow-wrap: break-word;  /* tự động xuống dòng khi quá dài */
+  word-wrap: break-word;      /* hỗ trợ trình duyệt cũ */
+  word-break: break-word;     /* ngắt chữ khi quá dài */
+  white-space: normal;        /* cho phép xuống dòng bình thường */
+
+  max-width: 100%;            /* đảm bảo không vượt quá chiều rộng cha */
+  box-sizing: border-box;     /* tính padding và border trong chiều rộng */
 }
+
+.post-content img, 
+.post-content video, 
+.post-content iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
 
 .post-image img {
   width: 100%;
