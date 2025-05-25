@@ -100,38 +100,27 @@
 
 
 .post-content {
-  font-size: 15px;
-  color: #444;
-  line-height: 1.6;
-
-  /* Bổ sung để ngăn tràn khung */
-  overflow-wrap: break-word;  /* tự động xuống dòng khi quá dài */
-  word-wrap: break-word;      /* hỗ trợ trình duyệt cũ */
-  word-break: break-word;     /* ngắt chữ khi quá dài */
-  white-space: normal;        /* cho phép xuống dòng bình thường */
-
-  max-width: 100%;            /* đảm bảo không vượt quá chiều rộng cha */
-  box-sizing: border-box;     /* tính padding và border trong chiều rộng */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+
 
 .post-content img, 
 .post-content video, 
 .post-content iframe {
-  max-width: 100%;
+  max-width: 100%;  /* ảnh không vượt quá container */
   height: auto;
-  display: block;
-  margin: 10px 0;
+  display: inline-block;  /* để ảnh nằm ngang với nhau */
+  margin: 5px 10px 5px 0; /* khoảng cách giữa các ảnh */
+  vertical-align: middle; /* canh ngang đẹp hơn */
   border-radius: 8px;
 }
 
 
-.post-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  max-height: 220px;
-  object-fit: cover;
-}
 
 .post-footer {
   border-top: 1px solid #eee;
