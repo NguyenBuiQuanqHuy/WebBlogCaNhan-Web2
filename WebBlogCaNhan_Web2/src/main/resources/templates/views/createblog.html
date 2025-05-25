@@ -30,21 +30,21 @@
   <!-- Nội dung chính được gom trong 1 div nhỏ hơn -->
   <div class="content-wrapper">
   <form th:action="@{/blog/create}" method="post" class="post-form">
-  <input type="text" class="form-title" name="title" placeholder="Title">
+  <input type="text" class="form-title" name="title" placeholder="Title" required>
 <div class="form-selects">
-  <select class="form-select" name="categoryId">
-    <option value="" disabled selected>Chủ đề</option>
+  <select class="form-select" name="categoryId" required>
+    <option value="">Chủ đề</option>
     <option th:each="c : ${categories}" th:value="${c.ID}" th:text="${c.category_name}"></option>
   </select>
 
-  <select class="form-select" name="mode">
-    <option value="" disabled selected>Trạng thái</option>
+  <select class="form-select" name="mode" required>
+    <option value="">Trạng thái</option>
     <option value="cong_khai">Công khai</option>
     <option value="rieng_tu">Riêng tư</option>
   </select>
    <button class="btn-submit" type="submit">ĐĂNG BÀI</button>
  </div>
-  <textarea class="form-content" rows="6" name="content" placeholder="Nhập nội dung..."></textarea>
+  <textarea class="form-content" rows="6" name="content" placeholder="Nhập nội dung..."required></textarea>
 
  
 </form>
