@@ -37,19 +37,21 @@
       </select>
     </div>
 
-    <div class="post-card">
+    <div th:each="post : ${posts}" class="post-card">
       <div class="post-header">
-        <span class="username">username</span>
-        <span class="post-date">14/05/2025 21:00</span>
-        <span class="topic">Chủ đề</span>
+        <span class="username" th:text="${post.user.username}">username</span>
+        <span class="post-date" th:text="${#temporals.format(post.created_at, 'dd/MM/yyyy HH:mm')}">14/05/2025 21:00</span>
+        <span class="topic" th:text="${post.category.category_name}">Chủ đề</span>
       </div>
 
-      <div class="post-title">Title</div>
-      <div class="post-content">Content</div>
+      <div class="post-title" th:text="${post.title}">Title</div>
+    <div class="post-content" th:utext="${post.content}"></div>
 
-      <div class="post-image">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="post image">
-      </div>
+
+      <!-- Nếu có ảnh bạn cần thêm thuộc tính image trong Post -->
+      <!-- <div class="post-image">
+        <img th:src="@{${post.imageUrl}}" alt="post image">
+      </div> -->
 
       <div class="post-footer">
         <button class="btn-comment"><i class="fa-solid fa-comment"></i> Bình luận</button>

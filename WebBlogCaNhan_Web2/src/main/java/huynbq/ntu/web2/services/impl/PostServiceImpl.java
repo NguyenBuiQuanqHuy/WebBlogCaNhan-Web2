@@ -1,6 +1,7 @@
 package huynbq.ntu.web2.services.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,11 @@ public class PostServiceImpl implements PostService{
 	        post.setMode(mode);
 
 	        return postRepository.save(post);
+	}
+	@Override
+	public List<Post> getRandomPublicPosts() {
+		// TODO Auto-generated method stub
+		 return postRepository.findRandomCongKhaiPosts();
 	}
 
 }
