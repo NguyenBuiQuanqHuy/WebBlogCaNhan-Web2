@@ -50,7 +50,11 @@
       </div>
 
       <div class="post-title" th:text="${post.title}">Title</div>
-    <div class="post-content" th:utext="${post.content}"></div>
+    <div class="post-content">
+  <div class="content-preview" th:utext="${post.content}"></div>
+  <button class="btn btn-link p-0 see-more-btn">Xem thêm...</button>
+</div>
+
 
 
       <!-- Nếu có ảnh bạn cần thêm thuộc tính image trong Post -->
@@ -67,6 +71,8 @@
 
 
   <script src="/js/menu.js"></script>
+  <script src="/js/content.js"></script>
+  
 
 </body>
 </html>

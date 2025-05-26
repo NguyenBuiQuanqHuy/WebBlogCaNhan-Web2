@@ -36,17 +36,23 @@
               <span class="topic text-muted" th:text="${post.category.category_name}">Chủ đề</span>
             </div>
             <div class="post-actions">
-              <button class="btn btn-sm btn-outline-primary me-2" title="Sửa">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
-              <button class="btn btn-sm btn-outline-danger" title="Xóa">
-                <i class="fa-solid fa-trash"></i>
-              </button>
+              <a th:href="@{'/myblog/edit/' + ${post.ID}}" class="btn btn-sm btn-outline-primary me-2" title="Sửa">
+				  <i class="fa-solid fa-pen-to-square"></i>
+				</a>
+
+              <button class="btn btn-sm btn-outline-danger" title="Xóa"
+        		th:onclick="'if(confirm(\'Bạn có chắc muốn xóa?\')) window.location.href=\'' + @{/myblog/delete/{id}(id=${post.ID})} + '\''">
+  				<i class="fa-solid fa-trash"></i>
+			</button>
+
             </div>
           </div>
 
           <div class="post-title h5 mt-2 mb-2" th:text="${post.title}">Tiêu đề</div>
-          <div class="post-content mb-3" th:utext="${post.content}">Nội dung</div>
+           <div class="post-content">
+			  <div class="content-preview" th:utext="${post.content}"></div>
+			  <button class="btn btn-link p-0 see-more-btn">Xem thêm...</button>
+			</div>
 
           <div class="post-footer">
             <button class="btn btn-sm btn-secondary"><i class="fa-solid fa-comment"></i> Bình luận</button>
@@ -58,5 +64,6 @@
   </div>
 
   <script src="/js/menu.js"></script>
+  <script src="/js/content.js"></script>
 </body>
 </html>

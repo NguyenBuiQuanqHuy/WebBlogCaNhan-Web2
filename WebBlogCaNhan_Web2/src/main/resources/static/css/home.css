@@ -1,4 +1,4 @@
-.main-content {
+	.main-content {
   padding: 20px;
   background: linear-gradient(to right, #ece9e6, #ffffff);
   font-family: Arial, sans-serif;
@@ -106,6 +106,17 @@
   max-width: 100%;
   box-sizing: border-box;
 }
+
+.content-preview {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.content-preview.expanded {
+  max-height: none;
+}
+
 
 
 .post-content img, 

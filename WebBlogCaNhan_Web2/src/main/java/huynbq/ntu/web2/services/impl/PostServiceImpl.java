@@ -64,6 +64,32 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return postRepository.findPostsByUsername(username);
 	}
-	
+	@Override
+	public void deletePost(int postID) {
+		// TODO Auto-generated method stub
+		postRepository.deleteById(postID);
+	}
+	@Override
+	public Post findPost(Integer postID) {
+		// TODO Auto-generated method stub
+		return postRepository.findById(postID)
+                .orElseThrow();
+	}
+	@Override
+	public void updatePost(int id, String title, String content, int categoryId, Mode mode) {
+		// TODO Auto-generated method stub
+		Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bài viết với ID = " + id));
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy chủ đề với ID = " + categoryId));
+
+        post.setTitle(title);
+        post.setContent(content);
+        post.setMode(mode);
+        post.setCategory(category);
+
+        postRepository.save(post);
+	}
 	
 }

@@ -14,4 +14,7 @@ public interface PostService {
 	public List<Post> searchPosts(String keyword, Integer categoryId);
 	public List<Post> getAllPosts();
 	public List<Post> getPostsByUser(String username);
+	public void deletePost(int postID);
+	public Post findPost(Integer postID);
+	public void updatePost(int id, String title, String content, int categoryId, Mode mode);
 }
