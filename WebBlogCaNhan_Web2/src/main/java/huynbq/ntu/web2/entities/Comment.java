@@ -18,7 +18,7 @@ public class Comment {
 	private int ID;
 	
 	private String content;
-	private LocalDateTime created_at;
+	private LocalDateTime createdat;
 	
 	@ManyToOne
 	@JoinColumn(name = "user",referencedColumnName = "username")
@@ -44,12 +44,14 @@ public class Comment {
 		this.content = content;
 	}
 
-	public LocalDateTime getCreated_at() {
-		return created_at;
+	
+
+	public LocalDateTime getCreatedAt() {
+		return createdat;
 	}
 
-	public void setCreated_at(LocalDateTime created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdat = createdAt;
 	}
 
 	public User getUser() {

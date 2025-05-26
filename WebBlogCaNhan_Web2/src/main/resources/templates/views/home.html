@@ -42,7 +42,7 @@
   </select>
 </form>
 
-    <div th:each="post : ${posts}" class="post-card">
+    <div th:each="post : ${posts}" th:attr="id='post-' + ${post.ID}" class="post-card">
       <div class="post-header">
         <span class="username" th:text="${post.user.username}">username</span>
         <span class="post-date" th:text="${#temporals.format(post.created_at, 'dd/MM/yyyy HH:mm')}">14/05/2025 21:00</span>
@@ -57,19 +57,76 @@
 
 
 
-      <!-- Nếu có ảnh bạn cần thêm thuộc tính image trong Post -->
-      <!-- <div class="post-image">
-        <img th:src="@{${post.imageUrl}}" alt="post image">
-      </div> -->
+<div class="post-footer">
+  <button class="btn btn-sm btn-secondary toggle-comment-btn">
+    <i class="fa-solid fa-comment"></i> Bình luận
+  </button>
+</div>
 
-      <div class="post-footer">
-       <button class="btn btn-sm btn-secondary"><i class="fa-solid fa-comment"></i> Bình luận</button>
-      </div>
+<!-- Khối bình luận (ẩn mặc định) -->
+<div class="comment-box mt-2" style="display: none;">
+  <!-- Nút đóng -->
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h6 class="mb-0">Bình luận</h6>
+    <button type="button" class="btn-close close-comment-btn" aria-label="Close"></button>
+  </div>
+
+  <!-- Danh sách bình luận -->
+ <!-- Danh sách bình luận -->
+<div class="comments-section mb-2">
+  <div th:if="${postCommentsMap[post.ID]?.isEmpty()}">
+    <p class="text-muted">Chưa có bình luận nào.</p>
+  </div>
+  <div th:each="comment : ${postCommentsMap[post.ID]}">
+  <strong th:if="${comment.user != null}" th:text="${comment.user.username}">Người dùng</strong>
+  <span th:text="${comment.content}">Nội dung bình luận</span>
+  <div class="text-muted small" th:if="${comment.createdAt != null}"
+       th:text="${#temporals.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}">
+    Ngày đăng
+  </div>
+  
+<div th:if="${comment.user != null and comment.user.username == currentUsername}" style="display: inline;">
+  <button type="button" 
+          class="btn btn-link btn-sm btn-edit-comment" 
+          th:data-comment-id="${comment.ID}"
+          style="padding: 0; margin-right: 8px; color: #0d6efd; text-decoration: underline;">
+    Sửa
+  </button>
+  
+  <form method="post" th:action="@{/comments/delete}" style="display:inline;">
+    <input type="hidden" name="commentId" th:value="${comment.ID}" />
+    <button type="submit" 
+            class="btn btn-link btn-sm" 
+            style="padding: 0; color: #dc3545; text-decoration: underline;"
+            onclick="return confirm('Bạn có chắc muốn xóa bình luận này?');">
+      Xóa
+    </button>
+  </form>
+</div>
+
+  
+</div>
+	
+</div>
+
+<!-- Form bình luận -->
+<form method="post" action="/comments" class="comment-form mt-3">
+  <input type="hidden" name="postId" th:value="${post.ID}" />
+  <div class="input-group">
+    <input type="text" name="content" class="form-control" placeholder="Viết bình luận..." required />
+    <button type="submit" class="btn btn-primary">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </div>
+</form>
+
+</div>
+	
     </div>
   </div>
 </div>
 
-
+	<script src="/js/comment.js"></script>
   <script src="/js/menu.js"></script>
   <script src="/js/content.js"></script>
   

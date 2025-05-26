@@ -202,3 +202,23 @@
   color: #0275d8; /* xanh dương */
 }
 
+.comment-box {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  overflow-wrap: break-word; /* QUAN TRỌNG: xử lý từ dài */
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.comment {
+  background: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 8px;
+  overflow-wrap: break-word; /* thêm xử lý tương tự */
+  word-wrap: break-word;
+  word-break: break-word;
+}
