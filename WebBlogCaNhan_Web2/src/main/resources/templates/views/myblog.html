@@ -31,9 +31,21 @@
         <div th:each="post : ${posts}" class="post-card mb-4">
           <div class="post-header d-flex justify-content-between">
             <div>
-              <span class="username fw-bold" th:text="${post.user.username}">username</span> · 
-              <span class="post-date" th:text="${#temporals.format(post.created_at, 'dd/MM/yyyy HH:mm')}">14/05/2025 21:00</span> · 
-              <span class="topic text-muted" th:text="${post.category.category_name}">Chủ đề</span>
+             <span class="username">
+  <i class="fa-regular fa-user"></i> 
+  <span th:text="${post.user.username}">username</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span class="post-date">
+  <i class="fa-regular fa-calendar"></i> 
+  <span th:text="${#temporals.format(post.created_at, 'dd/MM/yyyy HH:mm')}">14/05/2025 21:00</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span class="topic">
+  <i class="fa-solid fa-tag"></i> 
+  <span th:text="${post.category.category_name}">Chủ đề</span>
+</span>
+
             </div>
             <div class="post-actions">
               <a th:href="@{'/myblog/edit/' + ${post.ID}}" class="btn btn-sm btn-outline-primary me-2" title="Sửa">
@@ -55,7 +67,9 @@
 			</div>
 
           <div class="post-footer">
-            <button class="btn btn-sm btn-secondary"><i class="fa-solid fa-comment"></i> Bình luận</button>
+             <a th:href="@{/blog/post/{id}(id=${post.ID})}" class="btn btn-sm btn-secondary">
+  <i class="fa-solid fa-comment"></i> Bình luận
+</a>
           </div>
         </div>
       </div>
