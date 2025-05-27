@@ -9,4 +9,5 @@ public interface UserService {
 	boolean register(User user);
 	User findByUsername(String username);
 	public boolean checkLogin(String username, String rawPassword);
+	 boolean changePassword(String username, String oldPassword, String newPassword);
 }

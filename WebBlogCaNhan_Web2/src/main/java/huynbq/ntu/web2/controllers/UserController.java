@@ -80,7 +80,7 @@ public class UserController {
 
 	// Hàm kiểm tra mật khẩu hợp lệ
 	private boolean isValidPassword(String password) {
-	    String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{9,}$";
+	    String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$";
 	    return password.matches(pattern);
 	}
 
@@ -109,6 +109,44 @@ public class UserController {
     @GetMapping("/blog/logout")
     public String logout() { // xóa toàn bộ session
         return "redirect:/blog/login"; // chuyển về trang login
+    }
+
+    @GetMapping("/blog/change-password")
+    public String showChangePasswordForm() {
+        return "views/forgotpassword";  // Tạo file change-password.html
+    }
+
+    @PostMapping("/blog/change-password")
+    public String changePassword(@RequestParam String oldPassword,
+                                 @RequestParam String newPassword,
+                                 @RequestParam String confirmNewPassword,
+                                 ModelMap model,
+                                 HttpSession session) {
+
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            return "redirect:/blog/login"; // Nếu chưa đăng nhập
+        }
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            model.addAttribute("error", "Mật khẩu mới không khớp");
+            return "views/forgotpassword";
+        }
+
+        if (!isValidPassword(newPassword)) {
+            model.addAttribute("error", "Mật khẩu phải dài ít nhất 8 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt");
+            return "views/forgotpassword";
+        }
+
+        boolean success = userService.changePassword(username, oldPassword, newPassword);
+        if (!success) {
+            model.addAttribute("error", "Mật khẩu cũ không đúng hoặc lỗi hệ thống");
+            return "views/forgotpassword";
+        }
+
+        model.addAttribute("message", "Đổi mật khẩu thành công, vui lòng đăng nhập lại");
+        session.invalidate(); // đăng xuất sau khi đổi mật khẩu
+        return "redirect:/blog/login";
     }
 
 

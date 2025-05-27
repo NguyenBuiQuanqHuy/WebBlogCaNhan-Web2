@@ -38,6 +38,26 @@ public class UserServiceImpl implements UserService{
 
         return passwordEncoder.matches(rawPassword, user.getPassword());
 	}
+	@Override
+	public boolean changePassword(String username, String oldPassword, String newPassword) {
+		// TODO Auto-generated method stub
+		 User user = userRepository.findByUsername(username);
+	        if (user == null) {
+	            return false; 
+	        }
+
+	        if (oldPassword != null) {
+	            if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+	                return false; 
+	            }
+	        }
+
+	        String encodedNewPassword = passwordEncoder.encode(newPassword);
+	        user.setPassword(encodedNewPassword);
+
+	        userRepository.save(user);
+	        return true;
+	}
 	
 	
 

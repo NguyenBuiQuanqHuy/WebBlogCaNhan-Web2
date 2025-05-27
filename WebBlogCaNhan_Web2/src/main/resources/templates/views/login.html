@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/login.css}">
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <div class="login-container" role="main">
@@ -23,11 +24,14 @@
       <div class="input-group">
         <input type="text" name="username" placeholder="Tên đăng nhập" aria-label="Tên đăng nhập" />
       </div>
-      <div class="input-group">
-        <input type="password" name="password" placeholder="Mật khẩu" aria-label="Mật khẩu" />
+      <div class="input-group" style="position: relative;">
+        <input type="password" id="password" name="password" placeholder="Mật khẩu" aria-label="Mật khẩu" />
+		<span onclick="togglePassword('password')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+		  <i class="fa-solid fa-eye"></i>
+		</span>
       </div>
       <div class="forgot-password">
-        <a href="" aria-label="Quên mật khẩu">Quên mật khẩu ?</a>
+        <a href="/blog/change-password" aria-label="Quên mật khẩu">Quên mật khẩu ?</a>
       </div>
       <button type="submit" class="btn-login" aria-label="Đăng nhập">Đăng nhập</button>
     </form>
@@ -35,5 +39,7 @@
       <a href="/blog/register" aria-label="Đăng ký">Đăng ký</a>
     </div>
   </div>
+  
+  <script src="/js/showpass.js"></script>
 </body>
 </html>

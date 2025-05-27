@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/login.css}">
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <div class="login-container" role="main">
@@ -24,12 +25,19 @@
   <div class="input-group">
     <input type="text" name="username" placeholder="Tên đăng nhập" required />
   </div>
-  <div class="input-group">
-    <input type="password" name="password" placeholder="Mật khẩu" required />
-  </div>
-  <div class="input-group">
-    <input type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" required />
-  </div>
+  <div class="input-group" style="position: relative;">
+  <input type="password" id="password" name="password" placeholder="Mật khẩu" aria-label="Mật khẩu" required />
+  <span onclick="togglePassword('password')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+    <i class="fa-solid fa-eye"></i>
+  </span>
+</div>
+
+<div class="input-group" style="position: relative;">
+  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" aria-label="Nhập lại mật khẩu" required />
+  <span onclick="togglePassword('confirmPassword')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+    <i class="fa-solid fa-eye"></i>
+  </span>
+ </div>
   <button type="submit" class="btn-login">Đăng ký</button>
 </form>
 
@@ -37,5 +45,7 @@
   <a href="/blog/login">Đăng nhập</a>
 </div>
   </div>
+  
+   <script src="/js/showpass.js"></script>
 </body>
 </html>
