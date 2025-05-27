@@ -14,15 +14,47 @@ document.querySelectorAll('.post-card').forEach(card => {
    });
  });
  
-   window.addEventListener("DOMContentLoaded", function () {
-     const anchor = window.location.hash;
-     if (anchor && anchor.startsWith("#post-")) {
-       const postElement = document.querySelector(anchor);
-       if (postElement) {
-         const commentBox = postElement.querySelector(".comment-box");
-         if (commentBox) {
-           commentBox.style.display = "block";
-         }
-       }
+ function startEdit(commentId) {
+   document.getElementById('content-' + commentId).style.display = 'none';
+   document.getElementById('edit-form-' + commentId).style.display = 'block';
+
+   // Lấy nội dung cũ đưa vào textarea
+   const content = document.getElementById('content-' + commentId).innerText;
+   document.getElementById('edit-textarea-' + commentId).value = content;
+ }
+
+ function cancelEdit(commentId) {
+   document.getElementById('edit-form-' + commentId).style.display = 'none';
+   document.getElementById('content-' + commentId).style.display = 'block';
+ }
+
+ function saveComment(commentId) {
+   const textarea = document.getElementById('edit-textarea-' + commentId);
+   const newContent = textarea.value.trim();
+
+   if (newContent.length === 0) {
+     alert('Nội dung bình luận không được để trống!');
+     return;
+   }
+
+   fetch('/blog/comment/edit/' + commentId, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/x-www-form-urlencoded',
+       // Nếu dùng CSRF, thêm header token ở đây (xem phần lưu ý bên dưới)
+     },
+     body: 'content=' + encodeURIComponent(newContent)
+   })
+   .then(response => {
+     if (response.ok) {
+       document.getElementById('content-' + commentId).innerText = newContent;
+       cancelEdit(commentId);
+     } else {
+       alert('Có lỗi xảy ra khi cập nhật bình luận.');
      }
+   })
+   .catch(error => {
+     alert('Lỗi kết nối server.');
+     console.error(error);
    });
+ }

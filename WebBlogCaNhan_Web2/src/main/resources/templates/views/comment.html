@@ -57,15 +57,42 @@
         Chưa có bình luận nào. Hãy là người đầu tiên bình luận!
       </div>
   
-      <div th:each="c : ${comments}" class="card mb-3 shadow-sm comment-card">
-        <div class="card-body p-3">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h6 class="card-title mb-0" th:text="${c.user.username}">Tên người dùng</h6>
-            <small class="text-muted" th:text="${#temporals.format(c.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
-          </div>
-          <p class="card-text" th:text="${c.content}">Nội dung bình luận</p>
-        </div>
+<div th:each="c : ${comments}" class="card mb-3 shadow-sm comment-card" th:id="'comment-'+${c.ID}">
+  <div class="card-body p-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h6 class="card-title mb-0" th:text="${c.user.username}">Tên người dùng</h6>
+      <small class="text-muted" th:text="${#temporals.format(c.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
+    </div>
+
+    <!-- Nội dung bình luận hiển thị -->
+    <p class="card-text comment-content" th:id="'content-'+${c.ID}" th:text="${c.content}">Nội dung bình luận</p>
+
+    <!-- Form sửa bình luận (ẩn) -->
+    <div class="comment-edit-form" th:id="'edit-form-'+${c.ID}" style="display:none;">
+      <textarea class="form-control" th:id="'edit-textarea-'+${c.ID}"></textarea>
+      <div class="mt-2">
+        <button class="btn btn-success btn-sm" type="button" th:onclick="'saveComment(' + ${c.ID} + ')'" >Lưu</button>
+        <button class="btn btn-secondary btn-sm" type="button" th:onclick="'cancelEdit(' + ${c.ID} + ')'" >Hủy</button>
       </div>
+    </div>
+
+    <!-- Nút Sửa + Xóa chỉ hiện với comment của bạn -->
+    <div th:if="${c.user.username == currentUsername}" class="mt-2">
+      <button class="btn btn-link btn-sm p-0 me-2" type="button" th:onclick="'startEdit(' + ${c.ID} + ')'" style="text-decoration:none;">
+        <i class="fa-solid fa-pen"></i> Sửa
+      </button>
+
+      <form th:action="@{/blog/comment/delete/{id}(id=${c.ID})}" method="post" style="display:inline" 
+            onsubmit="return confirm('Bạn có chắc muốn xóa bình luận này?');">
+        <button type="submit" class="btn btn-link btn-sm text-danger p-0" style="text-decoration:none;">
+          <i class="fa-solid fa-trash"></i> Xóa
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
   
       <!-- Form gửi bình luận -->
       <form class="comment-form mt-4" th:action="@{/blog/comment}" method="post">
@@ -83,7 +110,7 @@
 </div>
 </div>
   
-  
+  	<script src="/js/comment.js"></script>
   <script src="/js/menu.js"></script>
   
 </body>
