@@ -14,4 +14,5 @@ public interface CommentService {
 	 public void save(Post post, User user, String content);
 	 public Comment findById(Integer commentID);
 	 public void delete(int commentId);
+	 Post getPostById(int id);
 }

@@ -10,4 +10,5 @@ import huynbq.ntu.web2.entities.Post;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	List<Comment> findByPostOrderByCreatedatAsc(Post post);
+	List<Comment> findByPost(Post post);
 }

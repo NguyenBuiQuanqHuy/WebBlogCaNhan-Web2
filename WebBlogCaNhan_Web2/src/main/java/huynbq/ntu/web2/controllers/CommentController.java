@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,6 +18,7 @@ import huynbq.ntu.web2.entities.Comment;
 import huynbq.ntu.web2.entities.Post;
 import huynbq.ntu.web2.entities.User;
 import huynbq.ntu.web2.repositories.CategoryRepository;
+import huynbq.ntu.web2.repositories.CommentRepository;
 import huynbq.ntu.web2.repositories.UserRepository;
 import huynbq.ntu.web2.services.interf.CommentService;
 import huynbq.ntu.web2.services.interf.PostService;
@@ -31,68 +34,31 @@ public class CommentController {
 	UserRepository userRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
+	@Autowired
+	CommentRepository commentRepository;
 	
-	@PostMapping("/comments")
-	public String postComment(@RequestParam("postId") int postId,
-	                          @RequestParam("content") String content,
-	                          HttpSession session,
-	                          ModelMap model) {
+	@GetMapping("/blog/post/{id}")
+    public String viewPostDetail(@PathVariable("id") int id, ModelMap model) {
+        Post post = commentService.getPostById(id);
+        List<Comment> comments = commentService.getCommentsByPost(post);
 
-	    String username = (String) session.getAttribute("username");
-	    if (username == null) {
-	        return "redirect:/login";
-	    }
+        model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
+        model.addAttribute("newComment", new Comment());
 
-	    Post post = postService.findPost(postId);
-	    User user = userRepository.findByUsername(username);
-
-	    if (post == null || user == null) {
-	        return "redirect:/";
-	    }
-
-	    commentService.save(post, user, content);
-
-	    // Gọi lại các dữ liệu như bên GET /blog/home
-	    List<Post> posts = postService.getRandomPublicPosts();
-	    List<Category> categories = categoryRepository.findAll();
-
-	    Map<Integer, List<Comment>> postCommentsMap = new HashMap<>();
-	    for (Post p : posts) {
-	        List<Comment> comments = commentService.getCommentsByPost(p);
-	        postCommentsMap.put(p.getID(), comments);
-	    }
-	    
-	    model.addAttribute("currentUsername", username);
-	    model.addAttribute("posts", posts);
-	    model.addAttribute("categories", categories);
-	    model.addAttribute("selectedCategory", null);
-	    model.addAttribute("keyword", null);
-	    model.addAttribute("postCommentsMap", postCommentsMap);
-
-	    return "redirect:/blog/home#post-" + postId;
-
-	}
+        return "views/comment";
+    }
 	
-	
-	@PostMapping("/comments/delete")
-	public String deleteComment(@RequestParam("commentId") int commentId,
-	                            HttpSession session,
-	                            RedirectAttributes redirectAttributes) {
+	 @PostMapping("/blog/comment")
+	    public String addComment(@RequestParam("postId") int postId,
+	                             @RequestParam("content") String content,
+	                            HttpSession session) {
+	        String username = (String) session.getAttribute("username");
+	        Post post = commentService.getPostById(postId);
+	        User user = userRepository.findByUsername((String) session.getAttribute("username"));
+	        commentService.save(post, user, content);
 
-	    String username = (String) session.getAttribute("username");
-	    if (username == null) {
-	        return "redirect:/login";
+	        return "redirect:/blog/post/" + postId;
 	    }
-
-	    Comment comment = commentService.findById(commentId);
-	    if (comment != null && comment.getUser().getUsername().equals(username)) {
-	        int postId = comment.getPost().getID();
-	        commentService.delete(commentId);
-	        return "redirect:/blog/home#post-" + postId;
-	    }
-
-	    return "redirect:/blog/home";
-	}
-
 
 }

@@ -1,0 +1,53 @@
+/* comment.css */
+
+/* Style tổng thể phần bình luận */
+.comment-section {
+  margin-top: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tiêu đề bình luận */
+.comment-section h4 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.3rem;
+}
+
+/* Thẻ card chứa mỗi bình luận */
+.comment-card {
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+  background-color: #fafafa;
+}
+
+.comment-card:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Tên người dùng bình luận */
+.comment-card .card-title {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Nội dung bình luận */
+.comment-card .card-text {
+  color: #444;
+  white-space: pre-line; /* Giữ xuống dòng trong nội dung */
+  font-size: 0.95rem;
+}
+
+/* Form bình luận */
+.comment-form textarea {
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease;
+}
+
+.comment-form textarea:focus {
+  border-color: #007bff;

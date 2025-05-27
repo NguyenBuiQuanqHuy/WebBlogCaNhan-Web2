@@ -10,12 +10,15 @@ import huynbq.ntu.web2.entities.Comment;
 import huynbq.ntu.web2.entities.Post;
 import huynbq.ntu.web2.entities.User;
 import huynbq.ntu.web2.repositories.CommentRepository;
+import huynbq.ntu.web2.repositories.PostRepository;
 import huynbq.ntu.web2.services.interf.CommentService;
 
 @Service
 public class CommentServiceImpl implements CommentService{
 	@Autowired
 	CommentRepository commentRepository;
+	@Autowired
+	PostRepository postRepository;
 	
 	@Override
 	public List<Comment> getCommentsByPost(Post post) {
@@ -44,6 +47,12 @@ public class CommentServiceImpl implements CommentService{
 	public void delete(int commentId) {
 		// TODO Auto-generated method stub
 		commentRepository.deleteById(commentId);
+	}
+
+	@Override
+	public Post getPostById(int id) {
+		// TODO Auto-generated method stub
+		return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
 	}
 
 	
