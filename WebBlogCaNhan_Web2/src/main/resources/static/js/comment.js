@@ -18,7 +18,6 @@ document.querySelectorAll('.post-card').forEach(card => {
    document.getElementById('content-' + commentId).style.display = 'none';
    document.getElementById('edit-form-' + commentId).style.display = 'block';
 
-   // Lấy nội dung cũ đưa vào textarea
    const content = document.getElementById('content-' + commentId).innerText;
    document.getElementById('edit-textarea-' + commentId).value = content;
  }
@@ -40,8 +39,7 @@ document.querySelectorAll('.post-card').forEach(card => {
    fetch('/blog/comment/edit/' + commentId, {
      method: 'POST',
      headers: {
-       'Content-Type': 'application/x-www-form-urlencoded',
-       // Nếu dùng CSRF, thêm header token ở đây (xem phần lưu ý bên dưới)
+       'Content-Type': 'application/x-www-form-urlencoded'
      },
      body: 'content=' + encodeURIComponent(newContent)
    })
@@ -53,8 +51,8 @@ document.querySelectorAll('.post-card').forEach(card => {
        alert('Có lỗi xảy ra khi cập nhật bình luận.');
      }
    })
-   .catch(error => {
+   .catch(() => {
      alert('Lỗi kết nối server.');
-     console.error(error);
    });
  }
+
