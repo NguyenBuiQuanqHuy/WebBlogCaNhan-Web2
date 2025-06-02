@@ -33,7 +33,7 @@ public class CommentServiceImpl implements CommentService{
 	        comment.setPost(post);
 	        comment.setUser(user);
 	        comment.setContent(content);
-	        comment.setCreatedAt(LocalDateTime.now()); // tự set thời gian tạo
+	        comment.setCreatedAt(LocalDateTime.now()); 
 	        commentRepository.save(comment);
 	}
 

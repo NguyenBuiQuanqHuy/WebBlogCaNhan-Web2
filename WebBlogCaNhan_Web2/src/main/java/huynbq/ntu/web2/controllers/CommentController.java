@@ -52,7 +52,7 @@ public class CommentController {
                              HttpSession session) {
         String username = (String) session.getAttribute("username");
         if(username == null) {
-        	return "redirect:/login";  // hoặc xử lý khi chưa đăng nhập
+        	return "redirect:/login"; 
         }
         Post post = commentService.getPostById(postId);
         User user = userRepository.findByUsername(username);

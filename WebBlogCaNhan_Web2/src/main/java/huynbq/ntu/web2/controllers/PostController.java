@@ -36,7 +36,7 @@ public class PostController {
 	                         HttpSession session) {
 	    String username = (String) session.getAttribute("username");
 	    postService.createPost(title, content, username, categoryId, Mode.valueOf(mode));
-	    return "redirect:/blog/home"; // hoặc redirect đến trang chi tiết
+	    return "redirect:/blog/home";
 	}
 	
 	@GetMapping("/myblog/delete/{id}")
@@ -50,8 +50,7 @@ public class PostController {
 	    Post post = postService.findPost(id);
 	    model.addAttribute("post", post);
 	    model.addAttribute("categories", categoryRepository.findAll());
-	    // Thêm categories, mode,... nếu cần
-	    return "views/editpost"; // Giao diện chỉnh sửa bài viết
+	    return "views/editpost"; 
 	}
 	
 	@PostMapping("/myblog/update")

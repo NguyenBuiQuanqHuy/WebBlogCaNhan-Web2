@@ -17,7 +17,7 @@ public class UserController {
 	UserService userService;
 	@GetMapping("/blog/register")
     public String showRegisterForm() {
-        return "views/register"; // trỏ đến file HTML: register.html
+        return "views/register";
     }
 	
 	@PostMapping("/blog/register")

@@ -29,7 +29,7 @@
 <div class="main-content" id="mainContent">
   <!-- Nội dung chính được gom trong 1 div nhỏ hơn -->
   <div class="content-wrapper">
-  <<form th:action="@{/myblog/update}" method="post" class="post-form">
+  <form th:action="@{/myblog/update}" method="post" class="post-form">
   <input type="hidden" name="id" th:value="${post.ID}" />
   
   <input type="text" class="form-title" name="title" placeholder="Tiêu đề" required th:value="${post.title}" />
