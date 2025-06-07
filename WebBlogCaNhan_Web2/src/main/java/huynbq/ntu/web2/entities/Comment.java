@@ -2,6 +2,7 @@ package huynbq.ntu.web2.entities;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,9 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID;
 	
+	@Column(columnDefinition = "LONGTEXT")
 	private String content;
+	
 	private LocalDateTime createdat;
 	
 	@ManyToOne

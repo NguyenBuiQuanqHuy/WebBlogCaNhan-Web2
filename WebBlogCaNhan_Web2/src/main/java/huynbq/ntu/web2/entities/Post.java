@@ -3,6 +3,7 @@ package huynbq.ntu.web2.entities;
 import java.time.LocalDateTime;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,7 +22,10 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID;
 	private String title;
+	
+	@Column(columnDefinition = "LONGTEXT")
 	private String content;
+	
 	private LocalDateTime created_at;
 	
 	@ManyToOne
