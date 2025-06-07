@@ -117,16 +117,12 @@ public class UserController {
     }
 
     @PostMapping("/blog/change-password")
-    public String changePassword(@RequestParam String oldPassword,
+    public String changePassword(@RequestParam String username,
+                                 @RequestParam String oldPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmNewPassword,
                                  ModelMap model,
                                  HttpSession session) {
-
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            return "redirect:/blog/login"; // Nếu chưa đăng nhập
-        }
 
         if (!newPassword.equals(confirmNewPassword)) {
             model.addAttribute("error", "Mật khẩu mới không khớp");
@@ -140,14 +136,14 @@ public class UserController {
 
         boolean success = userService.changePassword(username, oldPassword, newPassword);
         if (!success) {
-            model.addAttribute("error", "Mật khẩu cũ không đúng hoặc lỗi hệ thống");
+            model.addAttribute("error", "Tên tài khoản hoặc mật khẩu cũ không đúng");
             return "views/forgotpassword";
         }
 
         model.addAttribute("message", "Đổi mật khẩu thành công, vui lòng đăng nhập lại");
-        session.invalidate(); // đăng xuất sau khi đổi mật khẩu
         return "redirect:/blog/login";
     }
+
 
 
 }
